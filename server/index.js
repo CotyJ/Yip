@@ -3,21 +3,25 @@ const express = require('express');
 const app = express();
 const morgan = require("morgan");
 const PORT = process.env.PORT || 9999;
+const db = require("../db")
 
 // Middleware
 app.use(morgan('tiny'));
-app.use(express.json);
+app.use(express.json());
 
 // GET ALL
-app.get('/api/v1/restaurants', (req, res) => {
-  console.log('GET ALL Restaurants');
-  // console.log(req.params.id);
-
-
-  res.status(200).send();
+app.get('/api/v1/restaurants', async (req, res) => {
+  console.log("HI")
 
   try {
-  //
+    const result = await db.query('SELECT * FROM restaurants');
+    console.log(result.rows);
+
+    res.status(200).json({
+      status: 'success',
+      results: result.rows.length,
+      data: { restaurants: result.rows },
+    });
   } catch (err) {
     console.log(err);
   }
