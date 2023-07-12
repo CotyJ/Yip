@@ -11,8 +11,7 @@ app.use(express.json());
 
 // GET ALL
 app.get('/api/v1/restaurants', async (req, res) => {
-  console.log("HI")
-
+  console.log("GET ALL restaurants");
   try {
     const result = await db.query('SELECT * FROM restaurants');
     console.log(result.rows);
@@ -27,9 +26,9 @@ app.get('/api/v1/restaurants', async (req, res) => {
   }
 });
 
-
 // GET ONE
 app.get('/api/v1/restaurants/:id', async (req, res) => {
+  console.log("GET ONE restaurant");
   try {
     const result = await db.query('SELECT * FROM restaurants WHERE id = $1', [req.params.id,]);
     console.log(result.rows[0]);
@@ -44,32 +43,41 @@ app.get('/api/v1/restaurants/:id', async (req, res) => {
   }
 });
 
-
-
 // POST
-app.post('/api/v1/restaurants', (req, res) => {
-  console.log('Post a restaurant');
-  console.log(req.body);
-
-
+app.post('/api/v1/restaurants', async (req, res) => {
+  console.log('POST a restaurant');
   try {
-    //
+    const result = await db.query('INSERT INTO restaurants (name, location, price_range) VALUES ($1, $2, $3) returning *', [req.body.name, req.body.location, req.body.price_range]);
+    // console.log(result);
+    res.status(200).json({
+      status: 'success',
+      data: {
+        restaurant: result.rows[0]
+      }
+    });
   } catch (err) {
     console.log(err);
   }
 });
 
-
 // UPDATE
-app.put('/api/v1/restaurants', (req, res) => {
+app.put('/api/v1/restaurants/:id', async (req, res) => {
   console.log('Update a restaurant');
-  console.log(req.params);
-  console.log(req.body);
-
-
-
   try {
-  //
+
+    const previousVal = await db.query('SELECT * FROM restaurants WHERE id = $1', [req.params.id]);
+    console.log("Old", previousVal.rows[0]);
+
+    const result = await db.query(
+      'UPDATE restaurants SET name = $1, location = $2, price_range = $3 WHERE id = $4 returning *',
+      [req.body.name, req.body.location, req.body.price_range, req.params.id]);
+      console.log("New", result.rows[0])
+    res.status(200).json({
+      status: 'success',
+      data: {
+        restaurant: result.rows[0],
+      }
+    })
   } catch (err) {
     console.log(err);
   }
@@ -77,7 +85,7 @@ app.put('/api/v1/restaurants', (req, res) => {
 
 
 // DELETE
-app.delete('/api/v1/restaurants', (req, res) => {
+app.delete('/api/v1/restaurants', async (req, res) => {
   console.log('Delete a restaurant');
 
   try {
