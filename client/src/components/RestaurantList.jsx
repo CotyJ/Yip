@@ -7,9 +7,6 @@ const RestaurantList = (props) => {
   const { restaurants, setRestaurants } = useContext(RestaurantContext);
   let navigate = useNavigate();
 
-  console.log(navigate);
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
