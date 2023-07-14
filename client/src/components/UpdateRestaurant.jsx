@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import RestaurantFinder from '../apis/RestaurantFinder';
 
 const UpdateRestaurant = (props) => {
   const { id } = useParams();
+  let navigate = useNavigate();
   const [name, setName] = useState("")
   const [location, setLocation] = useState("")
-  const [price_range, setPriceRange] = useState("")
+  const [priceRange, setPriceRange] = useState("")
 
   console.log(id) //delete
 
@@ -20,6 +21,20 @@ const UpdateRestaurant = (props) => {
     }
     fetchData();
   }, [id])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedRestaurant = await RestaurantFinder.put(`/${id}`, {
+      name,
+      location,
+      price_range: priceRange,
+    });
+    console.log(updatedRestaurant);
+
+    navigate("/");
+
+  }
 
   return (
     <div>
@@ -37,10 +52,10 @@ const UpdateRestaurant = (props) => {
 
         <div className="form-control">
           <label htmlFor="price_range">Price Range</label>
-          <input value={price_range} onChange={e => setPriceRange(e.target.value)} id="price_range" className="form-control" type="number" />
+          <input value={priceRange} onChange={e => setPriceRange(e.target.value)} id="price_range" className="form-control" type="number" />
         </div>
 
-        <button className='btn btn-primary'>Submit</button>
+        <button type='submit' onClick={handleSubmit} className='btn btn-primary'>Submit</button>
 
       </form>
     </div>
