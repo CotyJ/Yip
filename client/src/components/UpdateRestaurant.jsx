@@ -9,12 +9,9 @@ const UpdateRestaurant = (props) => {
   const [location, setLocation] = useState("")
   const [priceRange, setPriceRange] = useState("")
 
-  console.log(id) //delete
-
   useEffect( () => {
     const fetchData = async() => {
       const response = await (await RestaurantFinder.get(`/${id}`)).data.data.restaurant
-      // console.log(response.data.data);
       setName(response.name);
       setLocation(response.location);
       setPriceRange(response.price_range);
