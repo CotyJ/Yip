@@ -1,7 +1,13 @@
 import React from "react";
 
 const UpdatePage = () => {
-  return(<div>UpdatePage</div>)
+  return(
+  <div>
+    <h1 className="text-center">
+      Update Restaurant
+    </h1>
+  </div>
+  )
 }
 
 export default UpdatePage;
