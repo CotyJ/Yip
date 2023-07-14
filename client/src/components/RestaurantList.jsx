@@ -8,13 +8,13 @@ const RestaurantList = (props) => {
     const fetchData = async () => {
       try {
         const response = await RestaurantFinder.get('/');
-        setRestaurants(response.data.data.restaurants); //may need 1 less .data
+        setRestaurants(response.data.data.restaurants);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, []);
+  }, [setRestaurants]);
 
   return (
     <div className="list-group">
