@@ -1,21 +1,21 @@
 import React from 'react';
-// import StarRating from './StarRating';
+import StarRating from './StarRating';
 
-const Reviews = ({selectedRestaurant}) => {
+const Reviews = ({ selectedRestaurant }) => {
   if (!selectedRestaurant.reviews) {
-    return <div>Loading...</div>; // or show a loading state while data is being fetched
+    return (
+      <div
+        className="card text-white bg-primary mb-3 mr-4"
+        style={{ maxWidth: '30%' }}
+      >
+        Loading...
+      </div>
+    );
   }
 
-  console.log("Reviews Component prop", selectedRestaurant)
-  console.log("Reviews Component prop.reviews", selectedRestaurant.reviews)
-  console.log("Reviews Component prop2[0]", selectedRestaurant.reviews[0])
-  // console.log("Reviews prop", props.reviews.reviews[0])
-  // props.reviews.reviews.map(review => {
-  //   console.log("review here");
-  // })
   return (
     <div className="row row-cols-3 mb-2">
-      {/* {props.reviews.reviews.map((review) => {
+      {selectedRestaurant.reviews.map((review) => {
         return (
           <div
             key={review.id}
@@ -33,7 +33,7 @@ const Reviews = ({selectedRestaurant}) => {
             </div>
           </div>
         );
-      })} */}
+      })}
     </div>
   );
 };

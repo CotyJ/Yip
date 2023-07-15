@@ -20,10 +20,8 @@ const RestaurantDetailPage = (props) => {
       }
     };
     fetchData();
-    console.log("Selected Restaurant", selectedRestaurant)
-  }, [id]);
+  }, []);
 
-  console.log( "SELECTED R" ,selectedRestaurant);
 
   return (
     <div>
@@ -31,8 +29,6 @@ const RestaurantDetailPage = (props) => {
         <>
           <div className="mt-3">
             <Reviews selectedRestaurant={selectedRestaurant} />
-            <div>{selectedRestaurant.id ? selectedRestaurant.id  : 'none'}</div>
-            <div>{`selectedRestaurant.id`}</div>
           </div>
             <AddReview />
         </>
