@@ -4,6 +4,7 @@ import { RestaurantContext } from '../context/RestaurantContext';
 import RestaurantFinder from '../apis/RestaurantFinder';
 // import StarRating from '../components/StarRating';
 import Reviews from '../components/Reviews';
+import AddReview from '../components/AddReview';
 
 const RestaurantDetailPage = (props) => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const RestaurantDetailPage = (props) => {
           <div className="mt-3">
             <Reviews />
           </div>
+            <AddReview />
         </>
       )}
     </div>
