@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { RestaurantContext } from '../context/RestaurantContext';
 import RestaurantFinder from '../apis/RestaurantFinder';
+// import StarRating from '../components/StarRating';
+import Reviews from '../components/Reviews';
 
 const RestaurantDetailPage = (props) => {
   const { id } = useParams();
@@ -22,7 +24,13 @@ const RestaurantDetailPage = (props) => {
 
   return (
     <div>
-      {selectedRestaurant && selectedRestaurant.name}
+      {selectedRestaurant && (
+        <>
+          <div className="mt-3">
+            <Reviews />
+          </div>
+        </>
+      )}
     </div>
   );
 };
