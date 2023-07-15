@@ -38,12 +38,12 @@ const AddReview = () => {
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="review">Review</label>
+          <label htmlFor="Review">Review</label>
           <textarea
           placeholder='Write your review here!'
             value={reviewText}
             onChange={(e) => setReviewText(e.target.value)}
-            id="review"
+            id="Review"
             className="form-control"
           ></textarea>
         </div>

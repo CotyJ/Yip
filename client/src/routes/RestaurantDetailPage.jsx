@@ -8,27 +8,31 @@ import AddReview from '../components/AddReview';
 
 const RestaurantDetailPage = (props) => {
   const { id } = useParams();
-  const { selectedRestaurant, setSelectedRestaurant } =
-    useContext(RestaurantContext);
+  const { selectedRestaurant, setSelectedRestaurant } = useContext(RestaurantContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await RestaurantFinder.get(`/${id}`);
-        setSelectedRestaurant(response.data.data.restaurant);
+        setSelectedRestaurant(response.data.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [id, setSelectedRestaurant]);
+    console.log("Selected Restaurant", selectedRestaurant)
+  }, [id]);
+
+  console.log( "SELECTED R" ,selectedRestaurant);
 
   return (
     <div>
       {selectedRestaurant && (
         <>
           <div className="mt-3">
-            <Reviews />
+            <Reviews selectedRestaurant={selectedRestaurant} />
+            <div>{selectedRestaurant.id ? selectedRestaurant.id  : 'none'}</div>
+            <div>{`selectedRestaurant.id`}</div>
           </div>
             <AddReview />
         </>

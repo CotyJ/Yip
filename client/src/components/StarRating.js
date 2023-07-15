@@ -2,9 +2,9 @@ import React from "react";
 
 const StarRating = ({rating}) => {
   const stars = [];
-  const solidStar = <i class="fa-solid fa-star text-warning"></i>;
-  const emptyStar = <i class="fa-regular fa-star text-warning"></i>;
-  const halfStar = <i class="fa-solid fa-star-half-stroke text-warning"></i>;
+  const solidStar = <i className="fa-solid fa-star text-warning"></i>;
+  const emptyStar = <i className="fa-regular fa-star text-warning"></i>;
+  const halfStar = <i className="fa-solid fa-star-half-stroke text-warning"></i>;
 
   for (let i = 1; i <= 5; i++) {
     if (i <= rating) {
