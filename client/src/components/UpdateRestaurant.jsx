@@ -22,7 +22,7 @@ const UpdateRestaurant = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedRestaurant = await RestaurantFinder.put(`/${id}`, {
+    await RestaurantFinder.put(`/${id}`, {
       name,
       location,
       price_range: priceRange,
