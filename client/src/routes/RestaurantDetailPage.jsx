@@ -22,11 +22,11 @@ const RestaurantDetailPage = (props) => {
     fetchData();
   }, []);
 
-
   return (
     <div>
       {selectedRestaurant && (
-        <>
+        <>{selectedRestaurant.restaurant &&
+        (<h1 className='text-center display-1'>{selectedRestaurant.restaurant.name}</h1>)}
           <div className="mt-3">
             <Reviews selectedRestaurant={selectedRestaurant} />
           </div>
